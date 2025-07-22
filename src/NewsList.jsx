@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const NewsList = () => {
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState([]); 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -10,8 +10,10 @@ const NewsList = () => {
       try {
         const response = await axios.get(
           'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=87c80c6b2cb247659836594f6c3c85a1'
+          
         );
-        setArticles(response.data.articles);
+        console.log(response)
+        setArticles(response.data.articles); 
       } catch (error) {
         console.error('Error fetching news:', error);
       } finally {
@@ -30,11 +32,9 @@ const NewsList = () => {
       ) : (
         articles.map((article, index) => (
           <div key={index} className="news-card">
-            <h3>{article.title || "No title available"}</h3>
-            <p>{article.description || "No description available"}</p>
-            <a href={article.url} target="_blank" rel="noopener noreferrer">
-              Read more
-            </a>
+            <h3>{article.title}</h3>
+            <p>{article.description}</p>
+            <a href={article.url} target="_blank">Read more</a>
           </div>
         ))
       )}
@@ -43,3 +43,9 @@ const NewsList = () => {
 };
 
 export default NewsList;
+
+  
+
+    
+
+    
